@@ -6,7 +6,7 @@ body {
 }
 
 .container {
-    max-width: 1200px;
+    max-width: 90%;
     margin: 0 auto;
 }
 
@@ -62,7 +62,7 @@ input[type="text"] {
     padding: 6px 8px;
     border: 1px solid #ccc;
     font-size: 14px;
-    width: 100%;
+    width: 90%;
 }
 
 input[type="text"]:focus {
