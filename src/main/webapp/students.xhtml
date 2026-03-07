@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<f:view>
+    <h:head>
+        <title>Students List</title>
+        <h:outputStylesheet library="css" name="styles.css" />
+    </h:head>
+    <h:body>
+        <div class="container">
+            <div class="left-section">
+                <h3>Add New Student</h3>
+                <h:form>
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="CNE:"/>
+                        <h:panelGroup>
+                            <h:inputText id="addCne" value="#{studentBean.studentToAdd.cne}" required="true" requiredMessage="CNE is required" styleClass="form-input"/>
+                            <h:message for="addCne" styleClass="error-message" />
+                        </h:panelGroup>
+
+                        <h:outputLabel value="First Name:"/>
+                        <h:panelGroup>
+                            <h:inputText id="addFname" value="#{studentBean.studentToAdd.fname}" required="true" requiredMessage="First name is required" styleClass="form-input"/>
+                            <h:message for="addFname" styleClass="error-message" />
+                        </h:panelGroup>
+
+                        <h:outputLabel value="Last Name:"/>
+                        <h:panelGroup>
+                            <h:inputText id="addLname" value="#{studentBean.studentToAdd.lname}" required="true" requiredMessage="Last name is required" styleClass="form-input"/>
+                            <h:message for="addLname" styleClass="error-message" />
+                        </h:panelGroup>
+
+                        <h:outputLabel value="Email:"/>
+                        <h:panelGroup>
+                            <h:inputText id="addEmail" value="#{studentBean.studentToAdd.email}" required="true" requiredMessage="Email is required" validatorMessage="Invalid email format" styleClass="form-input">
+                                <f:validateRegex pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" />
+                            </h:inputText>
+                            <h:message for="addEmail" styleClass="error-message" />
+                        </h:panelGroup>
+
+                        <h:outputLabel value="Birth Date:"/>
+                        <h:panelGroup>
+                            <h:inputText id="addBirthDate" value="#{studentBean.studentToAdd.birthDate}" required="true" requiredMessage="Birth date is required" converterMessage="Invalid date format. Use dd/MM/yyyy (e.g., 03/07/2014)" styleClass="form-input">
+                                <f:convertDateTime pattern="dd/MM/yyyy"/>
+                            </h:inputText>
+                            <h:message for="addBirthDate" styleClass="error-message" />
+                        </h:panelGroup>
+                    </h:panelGrid>
+
+                    <h:commandButton value="Add Student" action="#{studentBean.addStudent}"/>
+                </h:form>
+            </div>
+
+            <div class="right-section">
+                <h:form>
+                    <h:dataTable var="student" value="#{studentBean.students}">
+                        <f:facet name="caption">*** List of Students ***</f:facet>
+
+                        <h:column>
+                            <f:facet name="header">CNE</f:facet>
+                            <h:outputText value="#{student.cne}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">First Name</f:facet>
+                            <h:inputText id="fname" value="#{student.fname}" disabled="#{!student.editMode}" required="true" requiredMessage="First name is required" />
+                            <h:message for="fname" styleClass="error-message" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Last Name</f:facet>
+                            <h:inputText id="lname" value="#{student.lname}" disabled="#{!student.editMode}" required="true" requiredMessage="Last name is required" />
+                            <h:message for="lname" styleClass="error-message" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Email</f:facet>
+                            <h:inputText id="email" value="#{student.email}" disabled="#{!student.editMode}" required="true" requiredMessage="Email is required" validatorMessage="Invalid email format">
+                                <f:validateRegex pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" />
+                            </h:inputText>
+                            <h:message for="email" styleClass="error-message" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Birth Date</f:facet>
+                            <h:inputText id="birthDate" value="#{student.birthDate}" disabled="#{!student.editMode}" required="true" requiredMessage="Birth date is required" converterMessage="Invalid date format. Use dd/MM/yyyy (e.g., 03/07/2014)" >
+                                <f:convertDateTime pattern="dd/MM/yyyy"/>
+                            </h:inputText>
+                            <h:message for="birthDate" styleClass="error-message" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Actions</f:facet>
+                            <h:commandButton value="#{student.editMode?'Update':'Edit'}"
+                                             action="#{studentBean.updateStudent(student)}"/>
+                            <h:commandButton value="Delete" action="#{studentBean.deleteStudent(student)}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:form>
+            </div>
+        </div>
+    </h:body>
+</f:view>
+</html>
