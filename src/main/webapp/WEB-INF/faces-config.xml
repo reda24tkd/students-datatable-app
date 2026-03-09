@@ -21,4 +21,10 @@
         <managed-bean-class>ensa.tps._4_jsf_datatable.bean.StudentBean</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>localeBean</managed-bean-name>
+        <managed-bean-class>ensa.tps._4_jsf_datatable.bean.LocaleBean</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
 </faces-config>
