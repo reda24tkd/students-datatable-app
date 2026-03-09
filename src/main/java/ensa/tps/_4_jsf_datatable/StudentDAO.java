@@ -2,12 +2,14 @@ package ensa.tps._4_jsf_datatable;
 
 
 import ensa.tps._4_jsf_datatable.bean.Student;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 public class StudentDAO {
+    private static final Logger logger = Logger.getLogger(StudentDAO.class.getName());
 
     public List<Student> getStudents() {
         List<Student> students = new ArrayList<>();
@@ -23,8 +25,9 @@ public class StudentDAO {
                     rs.getDate("birth_date")
                 ));
             }
+            logger.info("Retrieved " + students.size() + " students from database");
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Error retrieving students", e);
         }
         return students;
     }
@@ -38,8 +41,9 @@ public class StudentDAO {
             stmt.setString(4, student.getEmail());
             stmt.setDate(5, new java.sql.Date(student.getBirthDate().getTime()));
             stmt.executeUpdate();
+            logger.info("Student inserted into database: CNE=" + student.getCne());
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Error adding student: CNE=" + student.getCne(), e);
         }
     }
 
@@ -52,8 +56,9 @@ public class StudentDAO {
             stmt.setDate(4, new java.sql.Date(student.getBirthDate().getTime()));
             stmt.setString(5, student.getCne());
             stmt.executeUpdate();
+            logger.info("Student updated in database: CNE=" + student.getCne());
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Error updating student: CNE=" + student.getCne(), e);
         }
     }
 
@@ -62,8 +67,9 @@ public class StudentDAO {
                 .prepareStatement("DELETE FROM students WHERE cne=?")) {
             stmt.setString(1, cne);
             stmt.executeUpdate();
+            logger.info("Student deleted from database: CNE=" + cne);
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Error deleting student: CNE=" + cne, e);
         }
     }
 }

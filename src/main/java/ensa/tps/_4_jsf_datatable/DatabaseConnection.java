@@ -3,13 +3,13 @@ package ensa.tps._4_jsf_datatable;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 public class DatabaseConnection {
+    private static final Logger logger = Logger.getLogger(DatabaseConnection.class.getName());
     private static DatabaseConnection instance;
     private Connection connection;
-//    private static final String URL = "jdbc:mysql://localhost:3306/student_db";
-//    private static final String USER = "root";
-//    private static final String PASSWORD = "";
     String host = System.getenv("MYSQL_HOST");
     String port = System.getenv("MYSQL_PORT");
     String db   = System.getenv("MYSQL_DATABASE");
@@ -21,10 +21,9 @@ public class DatabaseConnection {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(url, user, pass);
-//            connection = DriverManager.getConnection(URL, USER, PASSWORD);
-
+            logger.info("Database connection established: " + host + ":" + port + "/" + db);
         } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Failed to establish database connection", e);
         }
     }
 
