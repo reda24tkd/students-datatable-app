@@ -1,13 +1,29 @@
-package ensa.tps._4_jsf_datatable.bean;
+package ensa.tps._4_jsf_datatable.entity;
 
+import jakarta.persistence.*;
 import java.util.Date;
 
+@Entity
+@Table(name = "students")
 public class Student {
+    @Id
+    @Column(name = "cne")
     private String cne;
+    
+    @Column(name = "fname")
     private String fname;
+    
+    @Column(name = "lname")
     private String lname;
+    
+    @Column(name = "email")
     private String email;
+    
+    @Column(name = "birth_date")
+    @Temporal(TemporalType.DATE)
     private Date birthDate;
+    
+    @Transient
     private boolean editMode = false;
 
     public Student() {

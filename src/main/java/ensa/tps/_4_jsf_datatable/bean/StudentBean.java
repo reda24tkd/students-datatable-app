@@ -1,6 +1,7 @@
 package ensa.tps._4_jsf_datatable.bean;
 
 import ensa.tps._4_jsf_datatable.StudentDAO;
+import ensa.tps._4_jsf_datatable.entity.Student;
 import java.util.List;
 import java.util.logging.Logger;
 import java.util.logging.Level;
