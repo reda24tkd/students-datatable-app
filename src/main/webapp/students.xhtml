@@ -99,7 +99,7 @@
                             <f:facet name="header">#{msg['label.actions']}</f:facet>
                             <h:commandButton value="#{student.editMode ? msg['button.update'] : msg['button.edit']}"
                                              action="#{studentBean.updateStudent(student)}"/>
-                            <h:commandButton value="#{msg['button.delete']}" action="#{studentBean.deleteStudent(student)}"/>
+                            <h:commandButton value="#{msg['button.delete']}" action="#{studentBean.deleteStudent(student)}" />
                         </h:column>
                     </h:dataTable>
                 </h:form>
