@@ -1,35 +1,30 @@
 package ensa.tps._4_jsf_datatable.entity;
 
 import jakarta.persistence.*;
+
 import java.util.Date;
 
 @Entity
 @Table(name = "students")
 public class Student {
     @Id
-    @Column(name = "cne")
     private String cne;
-    
-    @Column(name = "fname")
     private String fname;
-    
-    @Column(name = "lname")
     private String lname;
-    
-    @Column(name = "email")
     private String email;
-    
     @Column(name = "birth_date")
     @Temporal(TemporalType.DATE)
     private Date birthDate;
-    
+
+    private Double scholarship;
+
     @Transient
     private boolean editMode = false;
 
     public Student() {
     }
 
-    public Student(String cne, String fname, String lname, String email, Date birthDate) {
+    public Student(String cne, String fname, String lname, String email, Date birthDate, Double scholarship) {
         this.cne = cne;
         this.fname = fname;
         this.lname = lname;
@@ -83,5 +78,13 @@ public class Student {
 
     public void setEditMode(boolean editMode) {
         this.editMode = editMode;
+    }
+
+    public Double getScholarship() {
+        return scholarship;
+    }
+
+    public void setScholarship(Double scholarship) {
+        this.scholarship = scholarship;
     }
 }

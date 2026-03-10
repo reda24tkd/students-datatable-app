@@ -6,16 +6,17 @@
 <f:view locale="#{localeBean.locale}">
     <h:head>
         <title>#{msg['page.title']}</title>
-        <h:outputStylesheet library="css" name="styles.css" />
+        <h:outputStylesheet library="css" name="styles.css"/>
     </h:head>
     <h:body>
         <div style="text-align: right; padding: 10px; background: white; margin-bottom: 10px;">
             <h:form>
-                <h:commandLink action="#{localeBean.setLanguage('en')}" value="English" /> | 
-                <h:commandLink action="#{localeBean.setLanguage('fr')}" value="Français" />
+                <h:commandLink value="English" action="#{localeBean.setLanguage('en')}"/> |
+                <h:commandLink value="Français" action="#{localeBean.setLanguage('fr')}"/> |
+                <h:commandLink value="Arabic" action="#{localeBean.setLanguage('ar')}"/>
             </h:form>
         </div>
-        
+
         <div class="container">
             <div class="left-section">
                 <h3>#{msg['add.title']}</h3>
@@ -23,36 +24,54 @@
                     <h:panelGrid columns="2">
                         <h:outputLabel value="#{msg['label.cne']}:"/>
                         <h:panelGroup>
-                            <h:inputText id="addCne" value="#{studentBean.studentToAdd.cne}" required="true" requiredMessage="#{msg['error.cne.required']}" styleClass="form-input"/>
-                            <h:message for="addCne" styleClass="error-message" />
+                            <h:inputText id="addCne" value="#{studentBean.studentToAdd.cne}" required="true"
+                                         requiredMessage="#{msg['error.cne.required']}" styleClass="form-input"/>
+                            <h:message for="addCne" styleClass="error-message"/>
                         </h:panelGroup>
 
                         <h:outputLabel value="#{msg['label.firstname']}:"/>
                         <h:panelGroup>
-                            <h:inputText id="addFname" value="#{studentBean.studentToAdd.fname}" required="true" requiredMessage="#{msg['error.firstname.required']}" styleClass="form-input"/>
-                            <h:message for="addFname" styleClass="error-message" />
+                            <h:inputText id="addFname" value="#{studentBean.studentToAdd.fname}" required="true"
+                                         requiredMessage="#{msg['error.firstname.required']}" styleClass="form-input"/>
+                            <h:message for="addFname" styleClass="error-message"/>
                         </h:panelGroup>
 
                         <h:outputLabel value="#{msg['label.lastname']}:"/>
                         <h:panelGroup>
-                            <h:inputText id="addLname" value="#{studentBean.studentToAdd.lname}" required="true" requiredMessage="#{msg['error.lastname.required']}" styleClass="form-input"/>
-                            <h:message for="addLname" styleClass="error-message" />
+                            <h:inputText id="addLname" value="#{studentBean.studentToAdd.lname}" required="true"
+                                         requiredMessage="#{msg['error.lastname.required']}" styleClass="form-input"/>
+                            <h:message for="addLname" styleClass="error-message"/>
                         </h:panelGroup>
 
                         <h:outputLabel value="#{msg['label.email']}:"/>
                         <h:panelGroup>
-                            <h:inputText id="addEmail" value="#{studentBean.studentToAdd.email}" required="true" requiredMessage="#{msg['error.email.required']}" validatorMessage="#{msg['error.email.invalid']}" styleClass="form-input">
-                                <f:validateRegex pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" />
+                            <h:inputText id="addEmail" value="#{studentBean.studentToAdd.email}" required="true"
+                                         requiredMessage="#{msg['error.email.required']}"
+                                         validatorMessage="#{msg['error.email.invalid']}" styleClass="form-input">
+                                <f:validateRegex pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"/>
                             </h:inputText>
-                            <h:message for="addEmail" styleClass="error-message" />
+                            <h:message for="addEmail" styleClass="error-message"/>
                         </h:panelGroup>
 
                         <h:outputLabel value="#{msg['label.birthdate']}:"/>
                         <h:panelGroup>
-                            <h:inputText id="addBirthDate" value="#{studentBean.studentToAdd.birthDate}" required="true" requiredMessage="#{msg['error.birthdate.required']}" converterMessage="#{msg['error.birthdate.invalid']}" styleClass="form-input">
+                            <h:inputText id="addBirthDate" value="#{studentBean.studentToAdd.birthDate}" required="true"
+                                         requiredMessage="#{msg['error.birthdate.required']}"
+                                         converterMessage="#{msg['error.birthdate.invalid']}" styleClass="form-input">
+
                                 <f:convertDateTime pattern="dd/MM/yyyy"/>
                             </h:inputText>
-                            <h:message for="addBirthDate" styleClass="error-message" />
+                            <h:message for="addBirthDate" styleClass="error-message"/>
+                        </h:panelGroup>
+
+                        <h:outputLabel value="#{msg['label.scholarship']}:"/>
+                        <h:panelGroup>
+                            <h:inputText id="addScholarship" value="#{studentBean.studentToAdd.scholarship}"
+                                         required="true" requiredMessage="#{msg['error.scholarship.required']}"
+                                         styleClass="form-input">
+                                <f:converter converterId="currencyConverter"/>
+                            </h:inputText>
+                            <h:message for="addScholarship" styleClass="error-message"/>
                         </h:panelGroup>
                     </h:panelGrid>
 
@@ -71,33 +90,48 @@
                         </h:column>
                         <h:column>
                             <f:facet name="header">#{msg['label.firstname']}</f:facet>
-                            <h:inputText id="fname" value="#{student.fname}" disabled="#{!student.editMode}" required="true" requiredMessage="#{msg['error.firstname.required']}" />
-                            <h:message for="fname" styleClass="error-message" />
+                            <h:inputText id="fname" value="#{student.fname}" disabled="#{!student.editMode}"
+                                         required="true" requiredMessage="#{msg['error.firstname.required']}"/>
+                            <h:message for="fname" styleClass="error-message"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">#{msg['label.lastname']}</f:facet>
-                            <h:inputText id="lname" value="#{student.lname}" disabled="#{!student.editMode}" required="true" requiredMessage="#{msg['error.lastname.required']}" />
-                            <h:message for="lname" styleClass="error-message" />
+                            <h:inputText id="lname" value="#{student.lname}" disabled="#{!student.editMode}"
+                                         required="true" requiredMessage="#{msg['error.lastname.required']}"/>
+                            <h:message for="lname" styleClass="error-message"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">#{msg['label.email']}</f:facet>
-                            <h:inputText id="email" value="#{student.email}" disabled="#{!student.editMode}" required="true" requiredMessage="#{msg['error.email.required']}" validatorMessage="#{msg['error.email.invalid']}">
-                                <f:validateRegex pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" />
+                            <h:inputText id="email" value="#{student.email}" disabled="#{!student.editMode}"
+                                         required="true" requiredMessage="#{msg['error.email.required']}"
+                                         validatorMessage="#{msg['error.email.invalid']}">
+                                <f:validateRegex pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"/>
                             </h:inputText>
-                            <h:message for="email" styleClass="error-message" />
+                            <h:message for="email" styleClass="error-message"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">#{msg['label.birthdate']}</f:facet>
-                            <h:inputText id="birthDate" value="#{student.birthDate}" disabled="#{!student.editMode}" required="true" requiredMessage="#{msg['error.birthdate.required']}" converterMessage="#{msg['error.birthdate.invalid']}" >
+                            <h:inputText id="birthDate" value="#{student.birthDate}" disabled="#{!student.editMode}"
+                                         required="true" requiredMessage="#{msg['error.birthdate.required']}"
+                                         converterMessage="#{msg['error.birthdate.invalid']}">
                                 <f:convertDateTime pattern="dd/MM/yyyy"/>
                             </h:inputText>
-                            <h:message for="birthDate" styleClass="error-message" />
+                            <h:message for="birthDate" styleClass="error-message"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">#{msg['label.scholarship']}</f:facet>
+                            <h:inputText id="scholarship" value="#{student.scholarship}" disabled="#{!student.editMode}"
+                                         required="true" requiredMessage="#{msg['error.scholarship.required']}">
+                                <f:converter converterId="currencyConverter"/>
+                            </h:inputText>
+                            <h:message for="scholarship" styleClass="error-message"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">#{msg['label.actions']}</f:facet>
                             <h:commandButton value="#{student.editMode ? msg['button.update'] : msg['button.edit']}"
                                              action="#{studentBean.updateStudent(student)}"/>
-                            <h:commandButton value="#{msg['button.delete']}" action="#{studentBean.deleteStudent(student)}" />
+                            <h:commandButton value="#{msg['button.delete']}"
+                                             action="#{studentBean.deleteStudent(student)}"/>
                         </h:column>
                     </h:dataTable>
                 </h:form>
