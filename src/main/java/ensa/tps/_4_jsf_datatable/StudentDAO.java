@@ -2,13 +2,30 @@ package ensa.tps._4_jsf_datatable;
 
 import ensa.tps._4_jsf_datatable.entity.Student;
 import jakarta.persistence.*;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
 public class StudentDAO {
     private static final Logger logger = Logger.getLogger(StudentDAO.class.getName());
-    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("StudentPU");
+    private EntityManagerFactory emf;
+
+    public StudentDAO() {
+        Map<String, String> properties = new HashMap<>();
+        String host = System.getenv("MYSQL_HOST");
+        if (host != null) {
+            properties.put("jakarta.persistence.jdbc.url", 
+                String.format("jdbc:mysql://%s:%s/%s",
+                    System.getenv("MYSQL_HOST"),
+                    System.getenv("MYSQL_PORT"),
+                    System.getenv("MYSQL_DATABASE")));
+            properties.put("jakarta.persistence.jdbc.user", System.getenv("MYSQL_USER"));
+            properties.put("jakarta.persistence.jdbc.password", System.getenv("MYSQL_PASSWORD"));
+        }
+        emf = Persistence.createEntityManagerFactory("StudentPU", properties);
+    }
 
     public List<Student> getStudents() {
         EntityManager em = emf.createEntityManager();

@@ -7,5 +7,4 @@ RUN mvn clean package -DskipTests
 # Stage 2: Deploy to Tomcat
 FROM tomcat:10.1-jdk17
 COPY --from=build /app/target/*.war /usr/local/tomcat/webapps/ROOT.war
-ENV CATALINA_OPTS="-DMYSQL_HOST=${MYSQL_HOST} -DMYSQL_PORT=${MYSQL_PORT} -DMYSQL_DATABASE=${MYSQL_DATABASE} -DMYSQL_USER=${MYSQL_USER} -DMYSQL_PASSWORD=${MYSQL_PASSWORD}"
 EXPOSE 8080

@@ -8,9 +8,9 @@
         <class>ensa.tps._4_jsf_datatable.entity.Student</class>
         <properties>
             <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
-            <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://${MYSQL_HOST}:${MYSQL_PORT}/${MYSQL_DATABASE}"/>
-            <property name="jakarta.persistence.jdbc.user" value="${MYSQL_USER}"/>
-            <property name="jakarta.persistence.jdbc.password" value="${MYSQL_PASSWORD}"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/student_db"/>
+            <property name="jakarta.persistence.jdbc.user" value="root"/>
+            <property name="jakarta.persistence.jdbc.password" value=""/>
             <property name="eclipselink.logging.level" value="INFO"/>
         </properties>
     </persistence-unit>
